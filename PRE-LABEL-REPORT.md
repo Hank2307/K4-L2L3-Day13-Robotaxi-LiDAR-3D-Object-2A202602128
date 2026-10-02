@@ -3,8 +3,8 @@
 ## 1. Thông tin nhóm và môi trường
 
 - Nhóm: **727**; phòng: **C402**; ngày thực hành: **01/10/2026**.
-- Thành viên: Phạm Hoàng Anh — 02128; Bạch Khánh An — 02095; Đỗ Lý Minh Hải — 02173; Lê Đức Mạnh — 02122.
-- Phân công: Hoàng Anh phụ trách tổng hợp; các thành viên cùng rà soát kết quả và nhận xét. Phân công riêng và việc đổi vai giữa A/B/C không được ghi lại.
+- Danh sách thành viên và MSSV: xem `TEAMMATES.md`; báo cáo dùng mã TV01–TV04 để đối chiếu.
+- Phân công: TV01 phụ trách tổng hợp; các thành viên cùng rà soát kết quả và nhận xét. Phân công riêng và việc đổi vai giữa A/B/C không được ghi lại.
 - Nguồn thực thi: lệnh được chạy bằng công cụ hỗ trợ tự động trên máy nhóm trưởng; nhóm phân tích kết quả đã lưu, ghi trạng thái **`provided-results`**.
 - Thời gian chạy: 15:41–15:42 ngày 01/10/2026 (UTC+7).
 - Máy: Windows x64, Docker Linux amd64; giới hạn container 4 CPU và 4 GiB RAM.
@@ -63,16 +63,16 @@ Nhóm gặp vùng cây bị gán `pedestrian`, hộp không có đối tượng 
 
 | Thành viên | Job nguồn đã nộp v1 | Peer QC | Phản hồi/v2 |
 | --- | ---: | --- | --- |
-| Phạm Hoàng Anh | 8 | Chưa ghi số lượt | Chưa có v2 ở lần cập nhật cuối |
-| Bạch Khánh An | 10 | Đã nộp feedback | Chờ QC, chưa nhận feedback |
-| Đỗ Lý Minh Hải | 6 | Đã nộp feedback | Đã bổ sung hộp xe máy, Save và nộp v2 cho bài được nhận xét |
-| Lê Đức Mạnh | 30 | Đã nộp feedback | Đã chỉnh width xe buýt, Save và nộp v2 cho bài được nhận xét |
+| TV01 | 8 | Chưa ghi số lượt | Chưa có v2 ở lần cập nhật cuối |
+| TV02 | 10 | Đã nộp feedback | Chờ QC, chưa nhận feedback |
+| TV03 | 6 | Đã nộp feedback | Đã bổ sung hộp xe máy, Save và nộp v2 cho bài được nhận xét |
+| TV04 | 30 | Đã nộp feedback | Đã chỉnh width xe buýt, Save và nộp v2 cho bài được nhận xét |
 
 Tổng 54 job v1. Bảng tổng hợp từ ghi nhận của các thành viên; chưa có tổng số lượt QC/v2 để thống kê. Bài đang chờ reviewer không được tính là đã done.
 
 ## 5. Nhận xét cá nhân
 
-### Phạm Hoàng Anh — 02128
+### TV01
 
 Tôi phụ trách tổng hợp và đã nộp 8 job nguồn v1. Nhóm gặp nhiều lỗi class, hộp thừa, kích thước và hướng. Điều này cho thấy cần đối chiếu pre-label với point cloud và camera thay vì giữ nguyên dự đoán.
 
@@ -80,7 +80,7 @@ Trong A/B, số hộp thay đổi từ 1 lên 13 khi đổi delta; B/C giảm t�
 
 Điều chưa chắc là chất lượng thực của từng cấu hình vì chỉ có một scan và không có ground truth. Ước lượng khoảng 50% pre-label cần sửa/xóa cũng chưa được đo có hệ thống.
 
-### Bạch Khánh An — 02095
+### TV02
 
 Tôi rà pre-label bằng CVAT và camera, đã nộp 10 job nguồn v1. Ở job 3105, một hộp vehicles nằm trong vùng đường trống; camera không cho thấy xe tương ứng và PCD chỉ có ít điểm. Sau khi đối chiếu tôi đã xóa hộp. Tôi cũng nộp feedback về hộp gộp nhiều người, đề nghị kiểm lại và tách cuboid cho từng người xác định được. Bài nguồn của tôi vẫn đang chờ QC.
 
@@ -88,7 +88,7 @@ Từ `run-A/summary.csv` và `run-B/summary.csv`, A có 1 hộp còn B có 13. �
 
 Tôi còn chưa rõ ranh giới cuboid với xe hai bánh chở hàng cồng kềnh, nhất là có bao gồm hàng và người hay không. Trường hợp này cần quy ước của LC và bằng chứng từng đối tượng.
 
-### Đỗ Lý Minh Hải — 02173
+### TV03
 
 Tôi đối chiếu point cloud và camera, thảo luận kích thước từng xe, đã nộp 6 job nguồn v1. Một hộp ô tô có width rộng hơn thân xe và đáy thấp hơn mặt đường khoảng 0.2 m theo ước lượng của tôi. Tôi dùng Top-view và camera trước để đối chiếu thân xe, nâng hộp theo z và thu hẹp width; không còn nhớ job ID. Kiểm đáy còn cần góc Bên và mặt đường gần đối tượng.
 
@@ -96,7 +96,7 @@ Tôi đã nộp feedback về cột điện bị gán pedestrian. Sau feedback v
 
 B/C có 13 và 6 hộp khi chỉ đổi pillar 0.16 lên 0.32 m. Kích thước pillar khác kích thước hộp xe, và số hộp ít hơn chưa chứng minh kết quả tốt hơn. Phép z đưa điểm về hệ model bằng cách trừ z_ground và delta rồi cộng lại khi xuất. Nếu quên cộng ngược ở ca B, cả batch thấp hơn 1.805 m; phải kiểm pipeline thay vì nâng từng hộp. Với xe trên dốc hoặc gờ giảm tốc, tôi còn thấy thao tác góc nghiêng khó và cần xác nhận cách xử lý pitch/roll của ca.
 
-### Lê Đức Mạnh — 02122
+### TV04
 
 Tôi rà cuboid bằng không gian 3D và camera, đã nộp 30 job nguồn v1. Ở job 3012, một hộp pedestrian nằm trên vùng tán cây. Side-view và camera trước không cho thấy người tại đó nên tôi đã xóa cuboid. Đây là quan sát một trường hợp; không đủ để kết luận lỗi toàn bộ class.
 
@@ -106,10 +106,24 @@ JSON B có 10 vehicles, 2 pedestrian, 1 two-wheels, còn C có 6 pedestrian. Cla
 
 Tôi còn khó xác định ranh giới cuboid của xe hai bánh có rider so với xe đỗ bị che một phần. Cần xác nhận quy ước bao rider với LC và không lấy height cố định cho mọi xe.
 
-## 6. Tổng kết và phản hồi LC
+## 6. Tổng kết
 
 Nhóm có đủ output A/B/C và ba ca QC để đối chiếu, giải thích được tác động của delta/pillar và cách phân biệt lỗi batch với lỗi từng hộp. Phần Robotaxi được sửa và QC trong hệ thống; output KITTI không được dùng thay cho nhãn Robotaxi.
 
-Theo thông tin trưởng nhóm nhận sau khi gửi bài, LC đánh giá kết quả tốt và đáp ứng yêu cầu; yêu cầu chỉnh cách trình bày báo cáo. Bản này đã được chỉnh lại bố cục và lời văn, giữ nguyên số liệu, nguồn kết quả và giới hạn đánh giá.
+LC ghi nhận ngày 02/10/2026: **ĐẠT**, đồng ý chuyển sang chỉnh/QC và không yêu cầu chạy lại. Theo góp ý, tên và MSSV được chuyển sang `TEAMMATES.md`. Trong lần thực hành tiếp theo, nhóm cần ghi vai trò từng lượt A/B/C, đổi vai và tự tay chạy lệnh.
 
 Deadline của ca là 12:00 ngày 02/10/2026 (UTC+7). Theo Q&A của LC, QC được giao ngẫu nhiên và có thể đến muộn; khi chưa có feedback thì hoàn thiện phần hiện tại, khi có feedback thì đối chiếu, Save và nộp v2 theo hạn portal.
+
+## LC ghi nhận riêng
+
+> LC ghi nhận ngày 02/10/2026. **Kết luận: ĐẠT.**
+
+- **Quyền dùng PCD/image và đúng ca:** Gói Student KITTI 000008 (giấy phép CC BY-NC-SA 3.0), không dùng dữ liệu Robotaxi. SHA-256 gói `f58ca337…` khớp file kiểm tra chính thức trên Release; input `3b5ea3da…` và image `sha256:e03983bd…` (amd64) khớp `smoke.json`.
+- **Có chạy thật / chỉ phân tích; còn cần lượt thực hành bổ sung:** Có lượt chạy thật trên máy trưởng nhóm (`smoke.json` passed, 15:41–15:42, 1/13/6, không trùng nhóm nào). Lệnh do công cụ hỗ trợ tự động chạy, nhóm ghi `provided-results`. LC không yêu cầu chạy lại.
+- **Output đủ, giữ bản gốc, không đưa ca lỗi vào CVAT:** Đủ `run-A/B/C` và `qc-cases`, không đổi so với lần 1. Báo cáo ghi rõ JSON KITTI và ca lỗi không import vào Robotaxi; JSON đã ở hệ nguồn, không cộng bù thêm.
+- **Nhận xét từng thành viên và quyết định dừng pipeline:** Báo cáo trình bày lại gọn, rõ; mọi số liệu đúng (phân bố lớp A/B/C, 3 ca lỗi 0/13, 13/13 −1,805 m, 1/13 ở hộp đầu x≈8,09). Mỗi người có quan sát CVAT Robotaxi cụ thể (job 3105, job 3012, cột điện gán `pedestrian`, hộp xe chìm ~0,2 m), phép z thuận/ngược, quyết định batch/one-box và điều chưa chắc.
+- **Đồng ý chuyển sang chỉnh/QC / cần bổ sung; lý do:** **Đồng ý.**
+
+**Nên sửa (không chặn):**
+1. Lần sau ghi vai trò từng lượt A/B/C, đổi vai giữa các lượt và tự tay chạy lệnh.
+2. Chuyển họ tên, MSSV từ báo cáo sang `TEAMMATES.md`.
